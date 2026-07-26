@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Fluxograma de Análise Inicial do Edital e Contrato
+    </title>
+
+    <style>
+        :root {
+            --azul-principal: #0f4c81;
+            --azul-escuro: #07365e;
+            --azul-claro: #eaf4fc;
+
+            --laranja: #e66c00;
+            --laranja-claro: #fff3e8;
+
+            --verde: #107c41;
+            --verde-claro: #eaf7ef;
+
+            --vermelho: #b42318;
+            --vermelho-claro: #fff0ee;
+
+            --roxo: #6b46c1;
+            --roxo-claro: #f3efff;
+
+            --cinza-fundo: #f5f7fa;
+            --cinza-borda: #d9e0e7;
+            --cinza-texto: #4b5563;
+            --branco: #ffffff;
+
+            --sombra:
+                0 8px 24px rgba(15, 76, 129, 0.10);
+
+            --sombra-hover:
+                0 15px 35px rgba(15, 76, 129, 0.18);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f8fafc 0%,
+                    var(--cinza-fundo) 100%
+                );
+
+            color: #1f2937;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .pagina {
+            width: 100%;
+            max-width: 1500px;
+
+            margin: 0 auto;
+            padding: 32px 24px 60px;
+        }
+
+        /* ==============================
+           CABEÇALHO
+        ============================== */
+
+        .cabecalho {
+            margin-bottom: 38px;
+            text-align: center;
+        }
+
+        .cabecalho-etiqueta {
+            display: inline-block;
+
+            margin-bottom: 12px;
+            padding: 7px 14px;
+
+            border: 1px solid #bed8ec;
+            border-radius: 999px;
+
+            background: var(--azul-claro);
+            color: var(--azul-principal);
+
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+        }
+
+        .cabecalho h1 {
+            margin: 0;
+
+            color: var(--azul-escuro);
+
+            font-size: clamp(26px, 3vw, 42px);
+            line-height: 1.15;
+        }
+
+        .cabecalho p {
+            max-width: 900px;
+
+            margin: 14px auto 0;
+
+            color: var(--cinza-texto);
+
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* ==============================
+           ESTRUTURA DO FLUXO
+        ============================== */
+
+        .fluxo {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .etapa {
+            position: relative;
+
+            width: min(760px, 100%);
+        }
+
+        .etapa-larga {
+            width: min(1040px, 100%);
+        }
+
+        .conector-vertical {
+            position: relative;
+
+            width: 4px;
+            height: 46px;
+
+            margin: 0 auto;
+
+            background: var(--azul-principal);
+        }
+
+        .conector-vertical::after {
+            content: "";
+
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+
+            width: 0;
+            height: 0;
+
+            border-top: 10px solid var(--azul-principal);
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+
+            transform: translateX(-50%);
+        }
+
+        /* ==============================
+           CARTÕES
+        ============================== */
+
+        .cartao {
+            position: relative;
+
+            width: 100%;
+
+            padding: 24px 26px;
+
+            border: 1px solid var(--cinza-borda);
+            border-left: 7px solid var(--azul-principal);
+            border-radius: 16px;
+
+            background: var(--branco);
+            box-shadow: var(--sombra);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .cartao.interativo {
+            cursor: pointer;
+        }
+
+        .cartao.interativo:hover,
+        .cartao.interativo:focus-within {
+            transform: translateY(-4px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .cartao-topo {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .numero {
+            flex: 0 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 46px;
+            height: 46px;
+
+            border-radius: 50%;
+
+            background: var(--azul-principal);
+            color: var(--branco);
+
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .cartao-conteudo {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cartao h2 {
+            margin: 0 0 8px;
+
+            color: var(--azul-escuro);
+
+            font-size: 20px;
+            line-height: 1.3;
+        }
+
+        .cartao p {
+            margin: 0;
+
+            color: var(--cinza-texto);
+
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .lista {
+            margin: 14px 0 0;
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .lista li {
+            position: relative;
+
+            margin: 7px 0;
+            padding-left: 20px;
+
+            color: var(--cinza-texto);
+
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .lista li::before {
+            content: "✓";
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            color: var(--verde);
+            font-weight: 800;
+        }
+
+        .etiqueta {
+            display: inline-block;
+
+            margin-top: 14px;
+            padding: 6px 11px;
+
+            border-radius: 999px;
+
+            background: var(--azul-claro);
+            color: var(--azul-principal);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* ==============================
+           RAMIFICAÇÃO DO CONTRATANTE
+        ============================== */
+
+        .ramificacao {
+            position: relative;
+
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(0, 1fr);
+
+            gap: 28px;
+
+            width: min(1040px, 100%);
+            margin-top: 46px;
+        }
+
+        .ramificacao::before {
+            content: "";
+
+            position: absolute;
+            top: -24px;
+            left: 25%;
+
+            width: 50%;
+            height: 4px;
+
+            background: var(--azul-principal);
+        }
+
+        .ramificacao-coluna {
+            position: relative;
+        }
+
+        .ramificacao-coluna::before {
+            content: "";
+
+            position: absolute;
+            top: -24px;
+            left: 50%;
+
+            width: 4px;
+            height: 24px;
+
+            background: var(--azul-principal);
+
+            transform: translateX(-50%);
+        }
+
+        .ramificacao-coluna::after {
+            content: "";
+
+            position: absolute;
+            top: -7px;
+            left: 50%;
+
+            width: 0;
+            height: 0;
+
+            border-top: 9px solid var(--azul-principal);
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+
+            transform: translateX(-50%);
+        }
+
+        .cartao-lei-14133 {
+            border-left-color: var(--azul-principal);
+        }
+
+        .cartao-lei-13303 {
+            border-left-color: var(--roxo);
+        }
+
+        .cartao-lei-13303 .numero {
+            background: var(--roxo);
+        }
+
+        .cartao-lei-13303 .etiqueta {
+            background: var(--roxo-claro);
+            color: var(--roxo);
+        }
+
+        .uniao-ramos {
+            position: relative;
+
+            width: min(1040px, 100%);
+            height: 48px;
+        }
+
+        .uniao-ramos::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 25%;
+
+            width: 50%;
+            height: 4px;
+
+            background: var(--azul-principal);
+        }
+
+        .uniao-ramos::after {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 50%;
+
+            width: 4px;
+            height: 48px;
+
+            background: var(--azul-principal);
+
+            transform: translateX(-50%);
+        }
+
+        .uniao-ramos .seta {
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+
+            width: 0;
+            height: 0;
+
+            border-top: 10px solid var(--azul-principal);
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+
+            transform: translateX(-50%);
+        }
+
+        /* ==============================
+           REGIMES DE EXECUÇÃO
+        ============================== */
+
+        .regimes {
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 12px;
+
+            margin-top: 18px;
+        }
+
+        .regime {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 72px;
+            padding: 12px;
+
+            border: 1px solid #cbd9e5;
+            border-radius: 10px;
+
+            background: #f8fbfd;
+            color: var(--azul-escuro);
+
+            font-size: 13px;
+            font-weight: 650;
+            line-height: 1.35;
+            text-align: center;
+        }
+
+        /* ==============================
+           DECISÃO SOBRE MATRIZ DE RISCOS
+        ============================== */
+
+        .decisao {
+            border-left-color: var(--laranja);
+        }
+
+        .decisao .numero {
+            background: var(--laranja);
+        }
+
+        .decisao h2 {
+            color: #9a4600;
+        }
+
+        .diamante {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 70px;
+            height: 70px;
+
+            margin: 20px auto 4px;
+
+            border: 3px solid var(--laranja);
+            border-radius: 10px;
+
+            background: var(--laranja-claro);
+
+            transform: rotate(45deg);
+        }
+
+        .diamante span {
+            color: var(--laranja);
+            font-size: 22px;
+            font-weight: 900;
+
+            transform: rotate(-45deg);
+        }
+
+        .ramificacao-riscos {
+            position: relative;
+
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(0, 1fr);
+
+            gap: 28px;
+
+            width: min(1040px, 100%);
+            margin-top: 46px;
+        }
+
+        .ramificacao-riscos::before {
+            content: "";
+
+            position: absolute;
+            top: -24px;
+            left: 25%;
+
+            width: 50%;
+            height: 4px;
+
+            background: var(--laranja);
+        }
+
+        .ramo-risco {
+            position: relative;
+        }
+
+        .ramo-risco::before {
+            content: "";
+
+            position: absolute;
+            top: -24px;
+            left: 50%;
+
+            width: 4px;
+            height: 24px;
+
+            background: var(--laranja);
+
+            transform: translateX(-50%);
+        }
+
+        .ramo-risco::after {
+            content: "";
+
+            position: absolute;
+            top: -7px;
+            left: 50%;
+
+            width: 0;
+            height: 0;
+
+            border-top: 9px solid var(--laranja);
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+
+            transform: translateX(-50%);
+        }
+
+        .rotulo-ramo {
+            position: absolute;
+            top: -54px;
+            left: 50%;
+
+            padding: 5px 12px;
+
+            border-radius: 999px;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            transform: translateX(-50%);
+        }
+
+        .rotulo-sim {
+            background: var(--verde-claro);
+            color: var(--verde);
+        }
+
+        .rotulo-nao {
+            background: var(--vermelho-claro);
+            color: var(--vermelho);
+        }
+
+        .cartao-sim {
+            height: 100%;
+
+            border-left-color: var(--verde);
+        }
+
+        .cartao-sim .numero {
+            background: var(--verde);
+        }
+
+        .cartao-sim h2 {
+            color: var(--verde);
+        }
+
+        .cartao-nao {
+            height: 100%;
+
+            border-left-color: var(--vermelho);
+        }
+
+        .cartao-nao .numero {
+            background: var(--vermelho);
+        }
+
+        .cartao-nao h2 {
+            color: var(--vermelho);
+        }
+
+        .alerta {
+            margin-top: 16px;
+            padding: 12px 14px;
+
+            border: 1px solid #f2c7c2;
+            border-radius: 9px;
+
+            background: var(--vermelho-claro);
+            color: #7a271a;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .uniao-riscos {
+            position: relative;
+
+            width: min(1040px, 100%);
+            height: 48px;
+        }
+
+        .uniao-riscos::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 25%;
+
+            width: 50%;
+            height: 4px;
+
+            background: var(--laranja);
+        }
+
+        .uniao-riscos::after {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 50%;
+
+            width: 4px;
+            height: 48px;
+
+            background: var(--laranja);
+
+            transform: translateX(-50%);
+        }
+
+        .uniao-riscos .seta {
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+
+            width: 0;
+            height: 0;
+
+            border-top: 10px solid var(--laranja);
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+
+            transform: translateX(-50%);
+        }
+
+        /* ==============================
+           ETAPAS FINAIS
+        ============================== */
+
+        .registro {
+            border-left-color: var(--roxo);
+        }
+
+        .registro .numero {
+            background: var(--roxo);
+        }
+
+        .registro h2 {
+            color: var(--roxo);
+        }
+
+        .campos-registro {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 12px;
+
+            margin-top: 18px;
+        }
+
+        .campo-registro {
+            padding: 14px;
+
+            border: 1px solid #d8cff2;
+            border-radius: 10px;
+
+            background: var(--roxo-claro);
+            color: #4e348d;
+
+            font-size: 13px;
+            font-weight: 650;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .juridico {
+            border-left-color: var(--verde);
+        }
+
+        .juridico .numero {
+            background: var(--verde);
+        }
+
+        .juridico h2 {
+            color: var(--verde);
+        }
+
+        .resultado {
+            width: min(640px, 100%);
+
+            padding: 24px 28px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--verde) 0%,
+                    #0b6334 100%
+                );
+
+            box-shadow:
+                0 14px 35px rgba(16, 124, 65, 0.24);
+
+            color: var(--branco);
+            text-align: center;
+        }
+
+        .resultado h2 {
+            margin: 0 0 7px;
+
+            font-size: 22px;
+        }
+
+        .resultado p {
+            margin: 0;
+
+            color: rgba(255, 255, 255, 0.88);
+
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* ==============================
+           DETALHES EXPANSÍVEIS
+        ============================== */
+
+        .botao-detalhes {
+            margin-top: 16px;
+            padding: 8px 13px;
+
+            border: 1px solid #b9cfdf;
+            border-radius: 8px;
+
+            background: transparent;
+            color: var(--azul-principal);
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .botao-detalhes:hover {
+            background: var(--azul-principal);
+            color: var(--branco);
+        }
+
+        .detalhes {
+            display: none;
+
+            margin-top: 16px;
+            padding-top: 15px;
+
+            border-top: 1px dashed #cad5df;
+        }
+
+        .detalhes.aberto {
+            display: block;
+
+            animation: aparecer 0.25s ease;
+        }
+
+        .detalhes p {
+            margin-bottom: 8px;
+
+            font-size: 13px;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==============================
+           RODAPÉ
+        ============================== */
+
+        .rodape {
+            max-width: 1000px;
+
+            margin: 40px auto 0;
+            padding-top: 20px;
+
+            border-top: 1px solid var(--cinza-borda);
+
+            color: #6b7280;
+
+            font-size: 12px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        /* ==============================
+           RESPONSIVIDADE
+        ============================== */
+
+        @media (max-width: 900px) {
+            .ramificacao,
+            .ramificacao-riscos {
+                grid-template-columns: 1fr;
+                gap: 22px;
+
+                margin-top: 24px;
+            }
+
+            .ramificacao::before,
+            .ramificacao-riscos::before {
+                display: none;
+            }
+
+            .ramificacao-coluna::before,
+            .ramificacao-coluna::after,
+            .ramo-risco::before,
+            .ramo-risco::after {
+                display: none;
+            }
+
+            .rotulo-ramo {
+                position: static;
+
+                display: inline-block;
+
+                margin: 0 0 8px;
+
+                transform: none;
+            }
+
+            .uniao-ramos,
+            .uniao-riscos {
+                width: 4px;
+                height: 46px;
+
+                background: var(--azul-principal);
+            }
+
+            .uniao-ramos::before,
+            .uniao-riscos::before {
+                display: none;
+            }
+
+            .uniao-ramos::after,
+            .uniao-riscos::after {
+                top: 0;
+                left: 0;
+
+                height: 46px;
+
+                transform: none;
+            }
+
+            .uniao-riscos,
+            .uniao-riscos::after {
+                background: var(--laranja);
+            }
+
+            .regimes {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .campos-registro {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .pagina {
+                padding:
+                    22px
+                    12px
+                    40px;
+            }
+
+            .cartao {
+                padding: 20px 17px;
+            }
+
+            .cartao-topo {
+                gap: 12px;
+            }
+
+            .numero {
+                width: 40px;
+                height: 40px;
+
+                font-size: 16px;
+            }
+
+            .cartao h2 {
+                font-size: 17px;
+            }
+
+            .cartao p {
+                font-size: 14px;
+            }
+
+            .regimes {
+                grid-template-columns: 1fr;
+            }
+
+            .cabecalho p {
+                font-size: 14px;
+            }
+        }
+
+        /* Redução de animações para acessibilidade */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="pagina">
+
+        <header class="cabecalho">
+
+            <span class="cabecalho-etiqueta">
+                Gestão contratual de obras
+            </span>
+
+            <h1>
+                Análise Inicial do Edital e do Contrato
+            </h1>
+
+            <p>
+                Processo para identificação da legislação aplicável,
+                do regime de execução, da alocação de riscos e das
+                informações que deverão ser formalmente registradas
+                antes da assinatura do contrato.
+            </p>
+
+        </header>
+
+        <section
+            class="fluxo"
+            aria-label="Fluxograma de análise do edital e contrato"
+        >
+
+            <!-- ETAPA 1 -->
+
+            <div class="etapa">
+
+                <article class="cartao">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            1
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Recebimento do edital e do contrato
+                            </h2>
+
+                            <p>
+                                Reunir o edital, termo de referência,
+                                projetos, planilhas, minutas, anexos,
+                                esclarecimentos, impugnações e demais
+                                documentos integrantes da contratação.
+                            </p>
+
+                            <span class="etiqueta">
+                                Entrada única do processo
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="conector-vertical"></div>
+
+            <!-- ETAPA 2 -->
+
+            <div class="etapa">
+
+                <article class="cartao">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            2
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Identificar o contratante
+                            </h2>
+
+                            <p>
+                                Verificar a natureza jurídica da entidade
+                                responsável pela contratação para identificar
+                                o regime legal aplicável.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <!-- RAMIFICAÇÃO DAS LEIS -->
+
+            <div class="ramificacao">
+
+                <div class="ramificacao-coluna">
+
+                    <article class="cartao cartao-lei-14133">
+
+                        <div class="cartao-topo">
+
+                            <div class="numero">
+                                A
+                            </div>
+
+                            <div class="cartao-conteudo">
+
+                                <h2>
+                                    Administração direta, autarquia ou fundação
+                                </h2>
+
+                                <p>
+                                    Aplicar, como referência principal,
+                                    a Lei nº 14.133/2021, observadas as
+                                    regulamentações específicas do ente
+                                    contratante.
+                                </p>
+
+                                <span class="etiqueta">
+                                    Lei nº 14.133/2021
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+                <div class="ramificacao-coluna">
+
+                    <article class="cartao cartao-lei-13303">
+
+                        <div class="cartao-topo">
+
+                            <div class="numero">
+                                B
+                            </div>
+
+                            <div class="cartao-conteudo">
+
+                                <h2>
+                                    Empresa pública ou sociedade de economia mista
+                                </h2>
+
+                                <p>
+                                    Aplicar, como referência principal,
+                                    a Lei nº 13.303/2016 e o regulamento
+                                    interno de licitações e contratos da
+                                    empresa estatal.
+                                </p>
+
+                                <span class="etiqueta">
+                                    Lei nº 13.303/2016
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+            <div class="uniao-ramos">
+                <span class="seta"></span>
+            </div>
+
+            <!-- ETAPA 3 -->
+
+            <div class="etapa etapa-larga">
+
+                <article class="cartao interativo">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            3
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Identificar o regime de execução
+                            </h2>
+
+                            <p>
+                                Registrar o regime previsto no edital e avaliar
+                                seus efeitos sobre medição, pagamento, projetos,
+                                quantitativos, responsabilidades e riscos.
+                            </p>
+
+                            <div class="regimes">
+
+                                <div class="regime">
+                                    Empreitada por preço unitário
+                                </div>
+
+                                <div class="regime">
+                                    Empreitada por preço global
+                                </div>
+
+                                <div class="regime">
+                                    Empreitada integral
+                                </div>
+
+                                <div class="regime">
+                                    Contratação integrada
+                                </div>
+
+                                <div class="regime">
+                                    Contratação semi-integrada
+                                </div>
+
+                                <div class="regime">
+                                    Contratação por tarefa
+                                </div>
+
+                                <div class="regime">
+                                    Fornecimento e prestação de serviço associado
+                                </div>
+
+                            </div>
+
+                            <button
+                                class="botao-detalhes"
+                                type="button"
+                                aria-expanded="false"
+                                onclick="alternarDetalhes(this)"
+                            >
+                                Exibir ponto de atenção
+                            </button>
+
+                            <div class="detalhes">
+
+                                <p>
+                                    O regime de execução deverá ser analisado
+                                    juntamente com os critérios de medição,
+                                    a distribuição das responsabilidades pelos
+                                    projetos e a matriz de riscos.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="conector-vertical"></div>
+
+            <!-- ETAPA 4 -->
+
+            <div class="etapa">
+
+                <article class="cartao decisao">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            4
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Existe matriz de alocação de riscos no edital?
+                            </h2>
+
+                            <p>
+                                Verificar o edital, a minuta contratual e os
+                                anexos técnicos antes da elaboração definitiva
+                                do orçamento.
+                            </p>
+
+                            <div
+                                class="diamante"
+                                aria-hidden="true"
+                            >
+                                <span>?</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <!-- RAMIFICAÇÃO DA MATRIZ -->
+
+            <div class="ramificacao-riscos">
+
+                <div class="ramo-risco">
+
+                    <span class="rotulo-ramo rotulo-sim">
+                        SIM
+                    </span>
+
+                    <article class="cartao cartao-sim">
+
+                        <div class="cartao-topo">
+
+                            <div class="numero">
+                                S
+                            </div>
+
+                            <div class="cartao-conteudo">
+
+                                <h2>
+                                    Ler e mapear cada risco
+                                </h2>
+
+                                <p>
+                                    Examinar a matriz antes da conclusão do
+                                    orçamento e identificar os eventos atribuídos
+                                    à contratada, ao contratante ou compartilhados.
+                                </p>
+
+                                <ul class="lista">
+
+                                    <li>
+                                        Identificar o responsável por cada risco.
+                                    </li>
+
+                                    <li>
+                                        Estimar probabilidade e impacto.
+                                    </li>
+
+                                    <li>
+                                        Avaliar reflexos em custo e prazo.
+                                    </li>
+
+                                    <li>
+                                        Prever medidas de prevenção e mitigação.
+                                    </li>
+
+                                    <li>
+                                        Incorporar os riscos assumidos ao orçamento.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+                <div class="ramo-risco">
+
+                    <span class="rotulo-ramo rotulo-nao">
+                        NÃO
+                    </span>
+
+                    <article class="cartao cartao-nao">
+
+                        <div class="cartao-topo">
+
+                            <div class="numero">
+                                N
+                            </div>
+
+                            <div class="cartao-conteudo">
+
+                                <h2>
+                                    Verificar a obrigatoriedade
+                                </h2>
+
+                                <p>
+                                    Analisar se a matriz é obrigatória em razão
+                                    do objeto, do valor ou do regime de execução.
+                                </p>
+
+                                <ul class="lista">
+
+                                    <li>
+                                        Obra ou serviço de grande vulto.
+                                    </li>
+
+                                    <li>
+                                        Contratação integrada.
+                                    </li>
+
+                                    <li>
+                                        Contratação semi-integrada.
+                                    </li>
+
+                                </ul>
+
+                                <div class="alerta">
+
+                                    <strong>
+                                        Se obrigatória:
+                                    </strong>
+
+                                    registrar a ausência e solicitar formalmente
+                                    esclarecimento, correção ou inclusão antes da
+                                    formulação definitiva da proposta.
+
+                                    <br><br>
+
+                                    <strong>
+                                        Se não obrigatória:
+                                    </strong>
+
+                                    registrar expressamente todas as premissas,
+                                    exclusões e riscos considerados no orçamento.
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+            <div class="uniao-riscos">
+                <span class="seta"></span>
+            </div>
+
+            <!-- ETAPA 5 -->
+
+            <div class="etapa etapa-larga">
+
+                <article class="cartao registro">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            5
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Registrar na Ficha de Abertura de Contrato
+                            </h2>
+
+                            <p>
+                                Consolidar as informações preliminares da
+                                contratação na Ficha de Abertura de Contrato
+                                da Dual D Engenharia.
+                            </p>
+
+                            <div class="campos-registro">
+
+                                <div class="campo-registro">
+                                    Lei e regulamentos aplicáveis
+                                </div>
+
+                                <div class="campo-registro">
+                                    Regime de execução contratado
+                                </div>
+
+                                <div class="campo-registro">
+                                    Existência ou ausência da matriz de riscos
+                                </div>
+
+                                <div class="campo-registro">
+                                    Riscos relevantes atribuídos à contratada
+                                </div>
+
+                                <div class="campo-registro">
+                                    Premissas adotadas no orçamento
+                                </div>
+
+                                <div class="campo-registro">
+                                    Pendências e esclarecimentos necessários
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="conector-vertical"></div>
+
+            <!-- ETAPA 6 -->
+
+            <div class="etapa">
+
+                <article class="cartao juridico">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            6
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Encaminhar para validação jurídica
+                            </h2>
+
+                            <p>
+                                Encaminhar a Ficha de Abertura, o edital,
+                                o contrato, a matriz de riscos e as pendências
+                                identificadas ao Jurídico antes da assinatura.
+                            </p>
+
+                            <ul class="lista">
+
+                                <li>
+                                    Confirmar a legislação aplicável.
+                                </li>
+
+                                <li>
+                                    Validar cláusulas de responsabilidade.
+                                </li>
+
+                                <li>
+                                    Avaliar riscos jurídicos e contratuais.
+                                </li>
+
+                                <li>
+                                    Verificar a necessidade de ressalvas.
+                                </li>
+
+                                <li>
+                                    Emitir parecer ou validação formal.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="conector-vertical"></div>
+
+            <!-- RESULTADO -->
+
+            <div class="resultado">
+
+                <h2>
+                    Contrato apto para assinatura
+                </h2>
+
+                <p>
+                    Prosseguir somente após o registro das informações,
+                    o tratamento das pendências e a validação formal
+                    das áreas responsáveis.
+                </p>
+
+            </div>
+
+        </section>
+
+        <footer class="rodape">
+
+            Fluxograma de apoio à análise preliminar.
+            A aplicação da legislação deverá considerar o objeto,
+            a natureza jurídica do contratante, os regulamentos próprios,
+            o edital, o contrato e a orientação do setor jurídico.
+
+        </footer>
+
+    </main>
+
+    <script>
+        function alternarDetalhes(botao) {
+            const detalhes =
+                botao.nextElementSibling;
+
+            const estaAberto =
+                detalhes.classList.toggle("aberto");
+
+            botao.setAttribute(
+                "aria-expanded",
+                estaAberto
+            );
+
+            botao.textContent =
+                estaAberto
+                    ? "Ocultar ponto de atenção"
+                    : "Exibir ponto de atenção";
+        }
+    </script>
+
+</body>
+
+</html>
