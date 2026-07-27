@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Fluxograma — Solicitação de Alteração ou Serviço Adicional
+    </title>
+
+    <style>
+        :root {
+            --azul-principal: #0f4c81;
+            --azul-escuro: #07365e;
+            --azul-claro: #eaf4fc;
+
+            --verde: #107c41;
+            --verde-claro: #eaf7ef;
+
+            --laranja: #e66c00;
+            --laranja-claro: #fff3e8;
+
+            --vermelho: #b42318;
+            --vermelho-claro: #fff0ee;
+
+            --roxo: #6b46c1;
+            --roxo-claro: #f3efff;
+
+            --cinza-fundo: #f5f7fa;
+            --cinza-borda: #d8e0e7;
+            --cinza-texto: #4b5563;
+
+            --branco: #ffffff;
+
+            --sombra:
+                0 8px 24px rgba(15, 76, 129, 0.10);
+
+            --sombra-hover:
+                0 14px 34px rgba(15, 76, 129, 0.17);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f8fafc 0%,
+                    var(--cinza-fundo) 100%
+                );
+
+            color: #1f2937;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .pagina {
+            width: 100%;
+            max-width: 1450px;
+
+            margin: 0 auto;
+            padding: 34px 24px 60px;
+        }
+
+        /* =========================
+           CABEÇALHO
+        ========================= */
+
+        .cabecalho {
+            margin-bottom: 38px;
+            text-align: center;
+        }
+
+        .cabecalho-etiqueta {
+            display: inline-block;
+
+            margin-bottom: 12px;
+            padding: 7px 14px;
+
+            border: 1px solid #bed8ec;
+            border-radius: 999px;
+
+            background: var(--azul-claro);
+            color: var(--azul-principal);
+
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+        }
+
+        .cabecalho h1 {
+            margin: 0;
+
+            color: var(--azul-escuro);
+
+            font-size: clamp(27px, 3vw, 42px);
+            line-height: 1.15;
+        }
+
+        .cabecalho p {
+            max-width: 900px;
+
+            margin: 14px auto 0;
+
+            color: var(--cinza-texto);
+
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           FLUXO
+        ========================= */
+
+        .fluxo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .etapa {
+            width: min(780px, 100%);
+        }
+
+        .etapa-larga {
+            width: min(1040px, 100%);
+        }
+
+        .conector {
+            position: relative;
+
+            width: 4px;
+            height: 46px;
+
+            margin: 0 auto;
+
+            background: var(--azul-principal);
+        }
+
+        .conector::after {
+            content: "";
+
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+
+            width: 0;
+            height: 0;
+
+            border-top: 10px solid var(--azul-principal);
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+
+            transform: translateX(-50%);
+        }
+
+        .conector-laranja {
+            background: var(--laranja);
+        }
+
+        .conector-laranja::after {
+            border-top-color: var(--laranja);
+        }
+
+        /* =========================
+           CARTÕES
+        ========================= */
+
+        .cartao {
+            width: 100%;
+
+            padding: 24px 26px;
+
+            border: 1px solid var(--cinza-borda);
+            border-left: 7px solid var(--azul-principal);
+            border-radius: 16px;
+
+            background: var(--branco);
+            box-shadow: var(--sombra);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .cartao:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .cartao-topo {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .numero {
+            flex: 0 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 46px;
+            height: 46px;
+
+            border-radius: 50%;
+
+            background: var(--azul-principal);
+            color: var(--branco);
+
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .cartao-conteudo {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cartao h2 {
+            margin: 0 0 8px;
+
+            color: var(--azul-escuro);
+
+            font-size: 20px;
+            line-height: 1.3;
+        }
+
+        .cartao p {
+            margin: 0;
+
+            color: var(--cinza-texto);
+
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .etiqueta {
+            display: inline-block;
+
+            margin-top: 14px;
+            padding: 6px 11px;
+
+            border-radius: 999px;
+
+            background: var(--azul-claro);
+            color: var(--azul-principal);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .lista {
+            margin: 14px 0 0;
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .lista li {
+            position: relative;
+
+            margin: 7px 0;
+            padding-left: 21px;
+
+            color: var(--cinza-texto);
+
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .lista li::before {
+            content: "✓";
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            color: var(--verde);
+            font-weight: 800;
+        }
+
+        /* =========================
+           TIPOS DE CARTÃO
+        ========================= */
+
+        .cartao-registro {
+            border-left-color: var(--roxo);
+        }
+
+        .cartao-registro .numero {
+            background: var(--roxo);
+        }
+
+        .cartao-registro h2 {
+            color: var(--roxo);
+        }
+
+        .cartao-comunicacao {
+            border-left-color: var(--laranja);
+        }
+
+        .cartao-comunicacao .numero {
+            background: var(--laranja);
+        }
+
+        .cartao-comunicacao h2 {
+            color: #9a4600;
+        }
+
+        .cartao-confirmacao {
+            border-left-color: var(--laranja);
+        }
+
+        .cartao-confirmacao .numero {
+            background: var(--laranja);
+        }
+
+        .cartao-confirmacao h2 {
+            color: #9a4600;
+        }
+
+        .cartao-execucao {
+            border-left-color: var(--verde);
+        }
+
+        .cartao-execucao .numero {
+            background: var(--verde);
+        }
+
+        .cartao-execucao h2 {
+            color: var(--verde);
+        }
+
+        .cartao-avaliacao {
+            border-left-color: var(--roxo);
+        }
+
+        .cartao-avaliacao .numero {
+            background: var(--roxo);
+        }
+
+        .cartao-avaliacao h2 {
+            color: var(--roxo);
+        }
+
+        /* =========================
+           ALERTAS
+        ========================= */
+
+        .alerta {
+            margin-top: 16px;
+            padding: 14px 16px;
+
+            border: 1px solid #f2c7c2;
+            border-radius: 10px;
+
+            background: var(--vermelho-claro);
+            color: #7a271a;
+
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .alerta strong {
+            color: var(--vermelho);
+        }
+
+        .alerta-emergencia {
+            border-color: #efd09b;
+            background: #fff8e7;
+            color: #7a4b00;
+        }
+
+        .alerta-emergencia strong {
+            color: #a15b00;
+        }
+
+        /* =========================
+           DECISÃO: CONFIRMAÇÃO
+        ========================= */
+
+        .diamante {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 72px;
+            height: 72px;
+
+            margin: 20px auto 4px;
+
+            border: 3px solid var(--laranja);
+            border-radius: 10px;
+
+            background: var(--laranja-claro);
+
+            transform: rotate(45deg);
+        }
+
+        .diamante span {
+            color: var(--laranja);
+            font-size: 22px;
+            font-weight: 900;
+
+            transform: rotate(-45deg);
+        }
+
+        .ramificacao {
+            position: relative;
+
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(0, 1fr);
+
+            gap: 28px;
+
+            width: min(1040px, 100%);
+            margin-top: 48px;
+        }
+
+        .ramificacao::before {
+            content: "";
+
+            position: absolute;
+            top: -24px;
+            left: 25%;
+
+            width: 50%;
+            height: 4px;
+
+            background: var(--laranja);
+        }
+
+        .ramo {
+            position: relative;
+        }
+
+        .ramo::before {
+            content: "";
+
+            position: absolute;
+            top: -24px;
+            left: 50%;
+
+            width: 4px;
+            height: 24px;
+
+            background: var(--laranja);
+
+            transform: translateX(-50%);
+        }
+
+        .ramo::after {
+            content: "";
+
+            position: absolute;
+            top: -7px;
+            left: 50%;
+
+            width: 0;
+            height: 0;
+
+            border-top: 9px solid var(--laranja);
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+
+            transform: translateX(-50%);
+        }
+
+        .rotulo-ramo {
+            position: absolute;
+            top: -56px;
+            left: 50%;
+
+            padding: 5px 12px;
+
+            border-radius: 999px;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            transform: translateX(-50%);
+        }
+
+        .rotulo-nao {
+            background: var(--vermelho-claro);
+            color: var(--vermelho);
+        }
+
+        .rotulo-sim {
+            background: var(--verde-claro);
+            color: var(--verde);
+        }
+
+        .cartao-nao {
+            height: 100%;
+
+            border-left-color: var(--vermelho);
+        }
+
+        .cartao-nao .numero {
+            background: var(--vermelho);
+        }
+
+        .cartao-nao h2 {
+            color: var(--vermelho);
+        }
+
+        .cartao-sim {
+            height: 100%;
+
+            border-left-color: var(--verde);
+        }
+
+        .cartao-sim .numero {
+            background: var(--verde);
+        }
+
+        .cartao-sim h2 {
+            color: var(--verde);
+        }
+
+        .uniao-ramos {
+            position: relative;
+
+            width: min(1040px, 100%);
+            height: 50px;
+        }
+
+        .uniao-ramos::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 25%;
+
+            width: 50%;
+            height: 4px;
+
+            background: var(--laranja);
+        }
+
+        .uniao-ramos::after {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 50%;
+
+            width: 4px;
+            height: 50px;
+
+            background: var(--laranja);
+
+            transform: translateX(-50%);
+        }
+
+        .uniao-ramos .seta {
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+
+            width: 0;
+            height: 0;
+
+            border-top: 10px solid var(--laranja);
+            border-right: 7px solid transparent;
+            border-left: 7px solid transparent;
+
+            transform: translateX(-50%);
+        }
+
+        /* =========================
+           DOCUMENTAÇÃO
+        ========================= */
+
+        .documentos {
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 12px;
+
+            margin-top: 18px;
+        }
+
+        .documento {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 74px;
+            padding: 13px;
+
+            border: 1px solid #c9e5d5;
+            border-radius: 10px;
+
+            background: var(--verde-claro);
+            color: #0b6334;
+
+            font-size: 13px;
+            font-weight: 650;
+            line-height: 1.35;
+            text-align: center;
+        }
+
+        /* =========================
+           AVALIAÇÃO FINAL
+        ========================= */
+
+        .avaliacao-itens {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 12px;
+
+            margin-top: 18px;
+        }
+
+        .avaliacao-item {
+            padding: 14px;
+
+            border: 1px solid #d8cff2;
+            border-radius: 10px;
+
+            background: var(--roxo-claro);
+            color: #4e348d;
+
+            font-size: 13px;
+            font-weight: 650;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .resultado {
+            width: min(700px, 100%);
+
+            padding: 25px 30px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--azul-principal) 0%,
+                    var(--azul-escuro) 100%
+                );
+
+            box-shadow:
+                0 14px 35px rgba(15, 76, 129, 0.24);
+
+            color: var(--branco);
+            text-align: center;
+        }
+
+        .resultado h2 {
+            margin: 0 0 8px;
+
+            font-size: 22px;
+        }
+
+        .resultado p {
+            margin: 0;
+
+            color: rgba(255, 255, 255, 0.88);
+
+            font-size: 14px;
+            line-height: 1.55;
+        }
+
+        /* =========================
+           DETALHES EXPANSÍVEIS
+        ========================= */
+
+        .botao-detalhes {
+            margin-top: 16px;
+            padding: 8px 13px;
+
+            border: 1px solid #b9cfdf;
+            border-radius: 8px;
+
+            background: transparent;
+            color: var(--azul-principal);
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .botao-detalhes:hover {
+            background: var(--azul-principal);
+            color: var(--branco);
+        }
+
+        .detalhes {
+            display: none;
+
+            margin-top: 16px;
+            padding-top: 15px;
+
+            border-top: 1px dashed #cad5df;
+        }
+
+        .detalhes.aberto {
+            display: block;
+
+            animation: aparecer 0.25s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================
+           RODAPÉ
+        ========================= */
+
+        .rodape {
+            max-width: 980px;
+
+            margin: 40px auto 0;
+            padding-top: 20px;
+
+            border-top: 1px solid var(--cinza-borda);
+
+            color: #6b7280;
+
+            font-size: 12px;
+            line-height: 1.55;
+            text-align: center;
+        }
+
+        /* =========================
+           RESPONSIVIDADE
+        ========================= */
+
+        @media (max-width: 900px) {
+            .ramificacao {
+                grid-template-columns: 1fr;
+                gap: 22px;
+
+                margin-top: 24px;
+            }
+
+            .ramificacao::before,
+            .ramo::before,
+            .ramo::after {
+                display: none;
+            }
+
+            .rotulo-ramo {
+                position: static;
+
+                display: inline-block;
+
+                margin-bottom: 8px;
+
+                transform: none;
+            }
+
+            .uniao-ramos {
+                width: 4px;
+                height: 46px;
+
+                background: var(--laranja);
+            }
+
+            .uniao-ramos::before {
+                display: none;
+            }
+
+            .uniao-ramos::after {
+                top: 0;
+                left: 0;
+
+                height: 46px;
+
+                transform: none;
+            }
+
+            .documentos {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .avaliacao-itens {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .pagina {
+                padding:
+                    22px
+                    12px
+                    40px;
+            }
+
+            .cartao {
+                padding: 20px 17px;
+            }
+
+            .cartao-topo {
+                gap: 12px;
+            }
+
+            .numero {
+                width: 40px;
+                height: 40px;
+
+                font-size: 16px;
+            }
+
+            .cartao h2 {
+                font-size: 17px;
+            }
+
+            .cartao p {
+                font-size: 14px;
+            }
+
+            .documentos {
+                grid-template-columns: 1fr;
+            }
+
+            .cabecalho p {
+                font-size: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="pagina">
+
+        <header class="cabecalho">
+
+            <span class="cabecalho-etiqueta">
+                Gestão contratual de obras
+            </span>
+
+            <h1>
+                Alteração ou Serviço Adicional Solicitado pela Fiscalização
+            </h1>
+
+            <p>
+                Fluxo para registro, formalização, autorização, execução
+                documentada e avaliação dos impactos contratuais decorrentes
+                de alterações ou serviços adicionais solicitados pela fiscalização.
+            </p>
+
+        </header>
+
+        <section
+            class="fluxo"
+            aria-label="Fluxograma de alteração ou serviço adicional"
+        >
+
+            <!-- ETAPA 1 -->
+
+            <div class="etapa">
+
+                <article class="cartao">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            1
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Solicitação da fiscalização
+                            </h2>
+
+                            <p>
+                                O fiscal solicita uma alteração, adequação,
+                                substituição ou serviço adicional, verbalmente
+                                ou por e-mail.
+                            </p>
+
+                            <span class="etiqueta">
+                                Entrada do processo
+                            </span>
+
+                            <div class="alerta">
+
+                                <strong>Ponto de atenção:</strong>
+
+                                solicitação verbal, mensagem informal ou orientação
+                                em campo não representa, por si só, autorização
+                                suficiente para execução de serviço que possa
+                                alterar o objeto, o custo ou o prazo contratual.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="conector"></div>
+
+            <!-- ETAPA 2 -->
+
+            <div class="etapa">
+
+                <article class="cartao cartao-registro">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            2
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Registrar imediatamente no Diário de Obra
+                            </h2>
+
+                            <p>
+                                Registrar a solicitação com data, horário,
+                                responsável, local, descrição objetiva e
+                                condições existentes no momento da orientação.
+                            </p>
+
+                            <ul class="lista">
+
+                                <li>
+                                    Identificar quem realizou a solicitação.
+                                </li>
+
+                                <li>
+                                    Descrever o serviço ou alteração requerida.
+                                </li>
+
+                                <li>
+                                    Informar a forma da solicitação: verbal ou escrita.
+                                </li>
+
+                                <li>
+                                    Registrar eventuais interferências nas atividades.
+                                </li>
+
+                                <li>
+                                    Anexar fotografias quando aplicável.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="conector"></div>
+
+            <!-- ETAPA 3 -->
+
+            <div class="etapa etapa-larga">
+
+                <article class="cartao cartao-comunicacao">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            3
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Enviar comunicação formal à fiscalização
+                            </h2>
+
+                            <p>
+                                Solicitar confirmação escrita da alteração ou
+                                do serviço adicional e esclarecer os possíveis
+                                impactos sobre escopo, custo, prazo, produtividade
+                                e sequência executiva.
+                            </p>
+
+                            <ul class="lista">
+
+                                <li>
+                                    Referenciar o contrato e o serviço envolvido.
+                                </li>
+
+                                <li>
+                                    Descrever a solicitação recebida.
+                                </li>
+
+                                <li>
+                                    Informar se o serviço consta ou não do escopo.
+                                </li>
+
+                                <li>
+                                    Apontar impactos preliminares em prazo e custo.
+                                </li>
+
+                                <li>
+                                    Solicitar orientação e autorização formal.
+                                </li>
+
+                            </ul>
+
+                            <button
+                                class="botao-detalhes"
+                                type="button"
+                                aria-expanded="false"
+                                onclick="alternarDetalhes(this)"
+                            >
+                                Exibir conteúdo mínimo da comunicação
+                            </button>
+
+                            <div class="detalhes">
+
+                                <p>
+                                    A comunicação deve apresentar o histórico
+                                    da solicitação, o local afetado, a solução
+                                    pretendida, os serviços envolvidos, a necessidade
+                                    de projeto ou detalhamento e os possíveis reflexos
+                                    no planejamento contratual.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="conector conector-laranja"></div>
+
+            <!-- ETAPA 4 -->
+
+            <div class="etapa">
+
+                <article class="cartao cartao-confirmacao">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            4
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                A confirmação formal foi recebida?
+                            </h2>
+
+                            <p>
+                                Aguardar manifestação formal da fiscalização
+                                ou do representante competente do contratante
+                                antes de iniciar a execução.
+                            </p>
+
+                            <div
+                                class="diamante"
+                                aria-hidden="true"
+                            >
+                                <span>?</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <!-- RAMIFICAÇÃO -->
+
+            <div class="ramificacao">
+
+                <!-- NÃO -->
+
+                <div class="ramo">
+
+                    <span class="rotulo-ramo rotulo-nao">
+                        NÃO
+                    </span>
+
+                    <article class="cartao cartao-nao">
+
+                        <div class="cartao-topo">
+
+                            <div class="numero">
+                                N
+                            </div>
+
+                            <div class="cartao-conteudo">
+
+                                <h2>
+                                    Não executar
+                                </h2>
+
+                                <p>
+                                    Manter o serviço suspenso até o recebimento
+                                    da confirmação formal, registrando a pendência
+                                    e os efeitos sobre o planejamento da obra.
+                                </p>
+
+                                <ul class="lista">
+
+                                    <li>
+                                        Reiterar formalmente a solicitação.
+                                    </li>
+
+                                    <li>
+                                        Registrar a pendência no Diário de Obra.
+                                    </li>
+
+                                    <li>
+                                        Informar o impacto sobre a sequência executiva.
+                                    </li>
+
+                                    <li>
+                                        Preservar evidências e comunicações.
+                                    </li>
+
+                                </ul>
+
+                                <div class="alerta-emergencia alerta">
+
+                                    <strong>Exceção:</strong>
+
+                                    diante de risco imediato à segurança,
+                                    à estabilidade, ao patrimônio ou em situação
+                                    emergencial, adotar somente as medidas indispensáveis
+                                    para eliminar ou reduzir o risco, documentando
+                                    integralmente a ocorrência e comunicando o
+                                    contratante imediatamente.
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+                <!-- SIM -->
+
+                <div class="ramo">
+
+                    <span class="rotulo-ramo rotulo-sim">
+                        SIM
+                    </span>
+
+                    <article class="cartao cartao-sim">
+
+                        <div class="cartao-topo">
+
+                            <div class="numero">
+                                S
+                            </div>
+
+                            <div class="cartao-conteudo">
+
+                                <h2>
+                                    Confirmar condições da autorização
+                                </h2>
+
+                                <p>
+                                    Verificar se a autorização define claramente
+                                    o escopo, a solução técnica, os limites da
+                                    execução e o tratamento dos impactos contratuais.
+                                </p>
+
+                                <ul class="lista">
+
+                                    <li>
+                                        Conferir o responsável pela autorização.
+                                    </li>
+
+                                    <li>
+                                        Confirmar o escopo autorizado.
+                                    </li>
+
+                                    <li>
+                                        Validar projetos e especificações.
+                                    </li>
+
+                                    <li>
+                                        Registrar ressalvas e premissas.
+                                    </li>
+
+                                    <li>
+                                        Atualizar o planejamento executivo.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+            <div class="uniao-ramos">
+                <span class="seta"></span>
+            </div>
+
+            <!-- ETAPA 5 -->
+
+            <div class="etapa etapa-larga">
+
+                <article class="cartao cartao-execucao">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            5
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Executar e documentar
+                            </h2>
+
+                            <p>
+                                Após a autorização formal, executar o serviço
+                                conforme as orientações recebidas e manter
+                                rastreabilidade completa dos recursos empregados.
+                            </p>
+
+                            <div class="documentos">
+
+                                <div class="documento">
+                                    Fotografias antes, durante e após a execução
+                                </div>
+
+                                <div class="documento">
+                                    Medições e quantitativos executados
+                                </div>
+
+                                <div class="documento">
+                                    Apontamento de mão de obra
+                                </div>
+
+                                <div class="documento">
+                                    Apontamento de equipamentos
+                                </div>
+
+                                <div class="documento">
+                                    Materiais utilizados
+                                </div>
+
+                                <div class="documento">
+                                    Notas fiscais e comprovantes
+                                </div>
+
+                                <div class="documento">
+                                    Período e duração da execução
+                                </div>
+
+                                <div class="documento">
+                                    Impactos em outras frentes de serviço
+                                </div>
+
+                            </div>
+
+                            <div class="alerta-emergencia alerta">
+
+                                A documentação deve permitir identificar
+                                separadamente os custos, recursos e prazos
+                                relacionados à alteração ou ao serviço adicional.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="conector"></div>
+
+            <!-- ETAPA 6 -->
+
+            <div class="etapa etapa-larga">
+
+                <article class="cartao cartao-avaliacao">
+
+                    <div class="cartao-topo">
+
+                        <div class="numero">
+                            6
+                        </div>
+
+                        <div class="cartao-conteudo">
+
+                            <h2>
+                                Avaliar impactos e direitos contratuais
+                            </h2>
+
+                            <p>
+                                Analisar se a alteração modifica o escopo,
+                                os quantitativos, as condições de execução,
+                                o custo, o prazo ou o equilíbrio econômico-financeiro
+                                do contrato.
+                            </p>
+
+                            <div class="avaliacao-itens">
+
+                                <div class="avaliacao-item">
+                                    Necessidade de termo aditivo
+                                </div>
+
+                                <div class="avaliacao-item">
+                                    Reequilíbrio econômico-financeiro
+                                </div>
+
+                                <div class="avaliacao-item">
+                                    Prorrogação de prazo
+                                </div>
+
+                                <div class="avaliacao-item">
+                                    Revisão de quantitativos
+                                </div>
+
+                                <div class="avaliacao-item">
+                                    Inclusão de novos serviços
+                                </div>
+
+                                <div class="avaliacao-item">
+                                    Formalização de pleito contratual
+                                </div>
+
+                            </div>
+
+                            <ul class="lista">
+
+                                <li>
+                                    Comparar o serviço com a planilha contratual.
+                                </li>
+
+                                <li>
+                                    Identificar alterações de quantitativos ou método.
+                                </li>
+
+                                <li>
+                                    Avaliar custos diretos e indiretos envolvidos.
+                                </li>
+
+                                <li>
+                                    Analisar impacto no caminho crítico.
+                                </li>
+
+                                <li>
+                                    Encaminhar a análise às áreas técnica e jurídica.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="conector"></div>
+
+            <!-- RESULTADO -->
+
+            <div class="resultado">
+
+                <h2>
+                    Alteração controlada e formalmente registrada
+                </h2>
+
+                <p>
+                    A execução somente deverá prosseguir mediante autorização
+                    formal, documentação completa e avaliação dos impactos
+                    técnicos, financeiros, contratuais e de prazo.
+                </p>
+
+            </div>
+
+        </section>
+
+        <footer class="rodape">
+
+            Este fluxo é um instrumento de controle técnico e contratual.
+            A execução de serviços adicionais deve observar o contrato,
+            o edital, a competência do agente que emitiu a autorização,
+            os procedimentos internos e a validação das áreas responsáveis.
+
+        </footer>
+
+    </main>
+
+    <script>
+        function alternarDetalhes(botao) {
+            const detalhes =
+                botao.nextElementSibling;
+
+            const estaAberto =
+                detalhes.classList.toggle("aberto");
+
+            botao.setAttribute(
+                "aria-expanded",
+                estaAberto
+            );
+
+            botao.textContent =
+                estaAberto
+                    ? "Ocultar conteúdo mínimo"
+                    : "Exibir conteúdo mínimo da comunicação";
+        }
+    </script>
+
+</body>
+
+</html>
